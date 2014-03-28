@@ -1,0 +1,50 @@
+@media screen {
+    .hide {
+        display: none;
+    }
+    
+    .strong {
+        font-weight: bold;
+    }
+    
+    #screen {
+        display: block;
+    }
+    
+    #edit-teamlist table {
+        border-collapse: collapse;
+    }
+        #edit-teamlist table td {
+            border: 1px solid black;
+        }
+            #edit-teamlist table td.editlist-number {
+                width: 50px;
+            }
+            #edit-teamlist table td.editlist-nameforme {
+                width: 300px;
+            }
+            #edit-teamlist table td.editlist-ability {
+                width: 100px;
+            }
+    
+    #edit-details table {
+        border-collapse: collapse;
+    }
+        #edit-details table td {
+            border: 1px solid black;
+            min-width: 50px;
+        }
+            #edit-nickname {
+                width: 100px;
+            }
+            #edit-details table td.stat-col {
+                width: 69px;
+            }
+                #edit-details table td.stat-col input {
+                    width: 64px;
+                }
+            
+            #edit-details .edit-move {
+                width: 100px;
+            }
+}
