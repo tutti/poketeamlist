@@ -66,6 +66,15 @@ require "data.php";
                     </tr>
                     <?php } ?>
                 </table>
+                <button id="totext">Save</button>
+                <button id="fromtext-open">Load</button>
+                <br />
+                <div id="textloader-container" class="hide">
+                    <textarea id="textloader" rows="6"></textarea>
+                    <br />
+                    <button id="text-close">Close window</button>
+                    <button id="fromtext">Load team</button>
+                </div>
             </div>
             <div id="edit-details" class="hide">
                 <h2>Edit your Pokémon here</h2>
@@ -192,7 +201,7 @@ require "data.php";
                         <td class="cell-whole left" colspan="6">Nickname: <span class="print-nickname"></span></td>
                     </tr>
                     <tr>
-                        <td class="cell-third left" colspan="2">Level: <span class="print-level"></span></td>
+                        <td class="cell-third left" colspan="2">Level: <span class="print-level">50</span></td>
                         <td class="cell-twothird left" colspan="4">Item: <span class="print-item"></span></td>
                     </tr>
                     <tr>
@@ -208,12 +217,12 @@ require "data.php";
                         <td class="cell-sixth strong center half-bottom">Spe</td>
                     </tr>
                     <tr>
-                        <td class="print-hp center half-top">&nbsp;</td>
-                        <td class="print-atk center half-top">&nbsp;</td>
-                        <td class="print-def center half-top">&nbsp;</td>
-                        <td class="print-spa center half-top">&nbsp;</td>
-                        <td class="print-spd center half-top">&nbsp;</td>
-                        <td class="print-spe center half-top">&nbsp;</td>
+                        <td class="print-hp center half-top"></td>
+                        <td class="print-atk center half-top"></td>
+                        <td class="print-def center half-top"></td>
+                        <td class="print-spa center half-top"></td>
+                        <td class="print-spd center half-top"></td>
+                        <td class="print-spe center half-top"></td>
                     </tr>
                     <tr>
                         <td class="cell-whole strong center half-bottom" colspan="6">Moves</td>

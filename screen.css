@@ -38,6 +38,15 @@
                 width: 135px;
             }
     
+    #totext, #fromtext-open, #text-close, #fromtext {
+        width: 215px;
+    }
+    
+    #textloader {
+        width: 428px;
+        /*height: 100px;*/
+    }
+    
     #edit-details table {
         border-collapse: collapse;
     }

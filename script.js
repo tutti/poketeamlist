@@ -15,6 +15,8 @@
     function recheck_ability() {
         var number = Number($("#edit-species").val())
         var forme = $("#edit-forme").val()
+        if (forme == "" || !forme) { forme = "regular" }
+        console.log(forme)
         var abilities = Pokemon[number].formes[forme]
         
         var current = $("#edit-ability").val()
@@ -51,6 +53,103 @@
         }
     }
     
+    function to_text() {
+        // Converts the pokémon list to text for saving.
+        // The pokémon are separated by newlines, while each section
+        // of the pokémon's data is separated by semicolons
+        // (dex_number;forme;level;nature;item;ability;stats;moves;nickname).
+        // Stats and moves are separated by slashes
+        // (hp/atk/def/spa/spd/spe, move/move/move/move).
+        var out = ""
+        
+        for (var i = 1; i <= 6; ++i) {
+            var table = $(".print-table[data-index='" + i + "']")
+            var editrow = $("tr[data-index='" + i + "']")
+            var number = editrow.find(".editlist-number").text()
+            var forme = table.find(".print-forme").text()
+            if (forme == "") { forme = "NONE" }
+            var ability = table.find(".print-ability").text()
+            var nickname = table.find(".print-nickname").text()
+            var level = table.find(".print-level").text()
+            level = Number(level)
+            if (level < 1) { level = 1 }
+            if (level > 100) { level = 100 }
+            var item = table.find(".print-item").text()
+            var nature = table.find(".print-nature").text()
+            if (!nature) { nature = "Adamant" }
+            var hp = table.find(".print-hp").text()
+            var atk = table.find(".print-atk").text()
+            var def = table.find(".print-def").text()
+            var spa = table.find(".print-spa").text()
+            var spd = table.find(".print-spd").text()
+            var spe = table.find(".print-spe").text()
+            var move1 = table.find(".print-move1").text()
+            var move2 = table.find(".print-move2").text()
+            var move3 = table.find(".print-move3").text()
+            var move4 = table.find(".print-move4").text()
+            
+            // Strip semicolons from item, nickname and moves
+            var smr = /;/g
+            var slr = /\//g
+            item = item.replace(smr, "")
+            nickname = nickname.replace(smr, "")
+            move1 = move1.replace(smr, "")
+            move2 = move2.replace(smr, "")
+            move3 = move3.replace(smr, "")
+            move4 = move4.replace(smr, "")
+            
+            // Strip slashes from moves
+            move1 = move1.replace(slr, "")
+            move2 = move2.replace(slr, "")
+            move3 = move3.replace(slr, "")
+            move4 = move4.replace(slr, "")
+            
+            var stats = [hp, atk, def, spa, spd, spe].join("/")
+            var moves = [move1, move2, move3, move4].join("/")
+            out += [number, forme, level, nature, item, ability, stats, moves, nickname].join(";") + "\n"
+        }
+        
+        return out.slice(0, -1)
+    }
+    
+    function from_text(text) {
+        // (dex_number;forme;level;nature;item;ability;stats;moves;nickname).
+        var pokemon_list = text.split("\n")
+        for (var i = 1; i <= 6; ++i) {
+            var table = $(".print-table[data-index='" + i + "']")
+            var editrow = $("tr[data-index='" + i + "']")
+            var info = pokemon_list[i-1].split(";")
+            var name = Pokemon[Number(info[0])].name
+            var forme = info[1]
+            if (forme == "NONE") { forme = "" }
+            var stats = info[6].split("/")
+            var moves = info[7].split("/")
+            editrow.find(".editlist-number").text(info[0])
+            editrow.find(".editlist-name").text(name)
+            table.find(".print-species").text(name)
+            editrow.find(".editlist-forme").text(forme)
+            table.find(".print-forme").text(forme)
+            table.find(".print-level").text(info[2])
+            table.find(".print-nature").text(info[3])
+            table.find(".print-item").text(info[4])
+            editrow.find(".editlist-ability").text(info[5])
+            table.find(".print-ability").text(info[5])
+            table.find(".print-hp").text(stats[0])
+            table.find(".print-atk").text(stats[1])
+            table.find(".print-def").text(stats[2])
+            table.find(".print-spa").text(stats[3])
+            table.find(".print-spd").text(stats[4])
+            table.find(".print-spe").text(stats[5])
+            table.find(".print-move1").text(moves[0])
+            table.find(".print-move2").text(moves[1])
+            table.find(".print-move3").text(moves[2])
+            table.find(".print-move4").text(moves[3])
+            table.find(".print-nickname").text(info[8])
+        }
+        
+        $("#edit-details").addClass("hide")
+    }
+    
     function edit_click(e) {
         // Get data from the edit list
         var index = $(e.currentTarget).attr("data-index")
@@ -78,11 +177,13 @@
         
         // Update the edit table with the data
         $("#edit-species").val(number)
+        recheck_forme()
         $("#edit-nickname").val(nickname)
         $("#edit-forme").val(forme)
         $("#edit-level").val(level)
         $("#edit-item").val(item)
         $("#edit-nature").val(nature)
+        recheck_ability()
         $("#edit-ability").val(ability)
         $("#edit-hp").val(hp)
         $("#edit-atk").val(atk)
@@ -217,13 +318,35 @@
     }
     
     function player_info_change() {
-        console.log("moo")
         var name = $("#edit-player-name").val()
         var id = $("#edit-player-id").val()
         var division = $("#edit-player-division").val()
         $("#print-player-name").text(name)
         $("#print-player-id").text(id)
         $("#print-player-division").text(division)
+    }
+    
+    function save_click() {
+        var text = to_text()
+        $("#textloader-container").removeClass("hide")
+        $("#fromtext").attr("disabled", "disabled")
+        $("#textloader").val(text)
+    }
+    
+    function hide_click() {
+        $("#textloader-container").addClass("hide")
+    }
+    
+    function load_open_click() {
+        $("#textloader-container").removeClass("hide")
+        $("#fromtext").attr("disabled", false)
+        $("#textloader").val("")
+    }
+    
+    function load_click() {
+        var text = $("#textloader").val()
+        from_text(text)
+        $("#textloader-container").addClass("hide")
     }
     
     $(document).ready(function() {
@@ -234,5 +357,9 @@
         $("#edit-item").keyup(item_change)
         $(".player-info").keyup(player_info_change)
         $("#edit-player-division").change(player_info_change)
+        $("#totext").click(save_click)
+        $("#fromtext-open").click(load_open_click)
+        $("#text-close").click(hide_click)
+        $("#fromtext").click(load_click)
     })
 })(jQuery)
