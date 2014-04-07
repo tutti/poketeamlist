@@ -23,21 +23,27 @@ require "data.php";
             <div id="edit-player">
                 <h2>Your own info</h2>
                 
-                <label for="edit-player-name">Name</label>
-                <input type="text" id="edit-player-name" name="edit-player-name" class="player-info" />
-                <br />
+                <table>
+                    <tr>
+                        <td><label for="edit-player-name">Name</label></td>
+                        <td><input type="text" id="edit-player-name" name="edit-player-name" class="player-info" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="edit-player-id">Player ID</label></td>
+                        <td><input type="text" id="edit-player-id" name="edit-player-id" class="player-info" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="edit-player-division">Age division</label></td>
+                        <td>
+                            <select id="edit-player-division" name="edit-player-division">
+                                <option value="Master">Master</option>
+                                <option value="Senior">Senior</option>
+                                <option value="Junior">Junior</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
                 
-                <label for="edit-player-id">Player ID</label>
-                <input type="text" id="edit-player-id" name="edit-player-id" class="player-info" />
-                <br />
-                
-                <label for="edit-player-division">Age division</label>
-                <select id="edit-player-division" name="edit-player-division">
-                    <option value="Master">Master</option>
-                    <option value="Senior">Senior</option>
-                    <option value="Junior">Junior</option>
-                </select>
-                <br />
             </div>
             <div id="edit-teamlist">
                 <h2>Your team list</h2>
@@ -66,59 +72,74 @@ require "data.php";
                 <input type="hidden" id="teamslot" value="0" />
                 <table>
                     <tr>
-                        <td id="editcell-species" colspan="12">
+                        <td class="head-cell" colspan="3">
                             <label for="edit-species">Pokémon</label>
+                        </td>
+                        <td id="editcell-species" colspan="9">
                             <select id="edit-species" name="edit-species">
                                 <?php for ($i = 1; $i < count($Pokemon); ++$i) { ?>
                                 <option value="<?= $i ?>"><?= $Pokemon[$i] ?></option>
                                 <?php } ?>
                             </select>
                         </td>
-                        <td id="editcell-forme" colspan="6" class="hide">
+                        <td id="editcell-forme-label" colspan="2" class="hide head-cell">
                             <label for="edit-forme">Forme</label>
+                        </td>
+                        <td id="editcell-forme" colspan="4" class="hide">
                             <select id="edit-forme" name="edit-forme">
                                 <option class="hide" value="regular"></option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="12">
+                        <td class="head-cell" colspan="3">
                             <label for="edit-nickname">Nickname</label>
+                        </td>
+                        <td colspan="9">
                             <input type="text" id="edit-nickname" name="edit-nickname" />
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5">
+                        <td class="head-cell" colspan="2">
                             <label for="edit-level">Level</label>
+                        </td>
+                        <td colspan="4">
                             <input type="number" id="edit-level" name="edit-level" min="1" max="100" value="50" />
                         </td>
-                        <td colspan="7">
+                        <td class="head-cell" colspan="2">
                             <label for="edit-item">Item</label>
+                        </td>
+                        <td colspan="4">
                             <input type="text" id="edit-item" name="edit-item" />
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5">
+                        <td class="head-cell" colspan="2">
                             <label for="edit-nature">Nature</label>
+                        </td>
+                        <td colspan="4">
                             <select id="edit-nature" name="edit-nature">
                                 <?php for ($i = 0; $i < count($Nature); ++$i) { ?>
                                 <option value="<?= $Nature[$i] ?>"><?= $Nature[$i] ?></option>
                                 <?php } ?>
                             </select>
                         </td>
-                        <td colspan="7">
+                        <td class="head-cell" colspan="2">
                             <label for="edit-ability">Ability</label>
+                        </td>
+                        <td colspan="4">
                             <select id="edit-ability" name="edit-ability">
+                                <option value="None">&lt;Select Pokémon&gt;</option>
                             </select>
                         </td>
                     </tr>
                     <tr>
-                        <td class="stat-col" colspan="2"><label for="edit-hp" class="strong">HP</label></td>
-                        <td class="stat-col" colspan="2"><label for="edit-atk" class="strong">Attack</label></td>
-                        <td class="stat-col" colspan="2"><label for="edit-def" class="strong">Defense</label></td>
-                        <td class="stat-col" colspan="2"><label for="edit-spa" class="strong">Sp. Atk</label></td>
-                        <td class="stat-col" colspan="2"><label for="edit-spd" class="strong">Sp. Def</label></td>
-                        <td class="stat-col" colspan="2"><label for="edit-spe" class="strong">Speed</label></td>
+                        <td class="stat-col stat-head" colspan="2"><label for="edit-hp" class="strong">HP</label></td>
+                        <td class="stat-col stat-head" colspan="2"><label for="edit-atk" class="strong">Attack</label></td>
+                        <td class="stat-col stat-head" colspan="2"><label for="edit-def" class="strong">Defense</label></td>
+                        <td class="stat-col stat-head" colspan="2"><label for="edit-spa" class="strong">Sp. Atk</label></td>
+                        <td class="stat-col stat-head" colspan="2"><label for="edit-spd" class="strong">Sp. Def</label></td>
+                        <td class="stat-col stat-head" colspan="2"><label for="edit-spe" class="strong">Speed</label></td>
                     </tr>
                     <tr>
                         <td class="stat-col" colspan="2"><input type="number" id="edit-hp" name="edit-hp" /></td>
@@ -129,7 +150,7 @@ require "data.php";
                         <td class="stat-col" colspan="2"><input type="number" id="edit-spe" name="edit-spe" /></td>
                     </tr>
                     <tr>
-                        <td colspan="12" class="strong">Moves</td>
+                        <td colspan="12" class="moves-head strong">Moves</td>
                     </tr>
                     <tr>
                         <?php for ($i = 1; $i <= 4; ++$i) { ?>
@@ -147,34 +168,36 @@ require "data.php";
         <div id="print">
             <table class="print-player-info">
                 <tr>
-                    <td class="strong left">Name</td>
-                    <td id="print-player-name"></td>
+                    <td class="strong left head">Name</td>
+                    <td id="print-player-name" class="left"></td>
                 </tr>
                 <tr>
-                    <td class="strong left">Player ID</td>
-                    <td id="print-player-id"></td>
+                    <td class="strong left head">Player ID</td>
+                    <td id="print-player-id" class="left"></td>
                 </tr>
                 <tr>
-                    <td class="strong left">Age division</td>
-                    <td id="print-player-division">Master</td>
+                    <td class="strong left head">Age division</td>
+                    <td id="print-player-division" class="left">Master</td>
                 </tr>
             </table>
+            <img id="logo" src="logo.jpg" />
+            <div class="clearfloat"></div>
             <?php for ($i=1; $i<=6; ++$i) { ?>
             <div class="table-container <?php if ($i%2 == 0) { ?>even<?php } else {?>odd<?php } ?>">
                 <table class="print-table" data-index="<?= $i ?>">
                     <tr>
-                        <td class="cell-whole" colspan="6">Pokémon: <span class="print-species"></span> <span class="print-forme"></span></td>
+                        <td class="cell-whole left" colspan="6">Pokémon: <span class="print-species"></span> <span class="print-forme"></span></td>
                     </tr>
                     <tr>
-                        <td class="cell-whole" colspan="6">Nickname: <span class="print-nickname"></span></td>
+                        <td class="cell-whole left" colspan="6">Nickname: <span class="print-nickname"></span></td>
                     </tr>
                     <tr>
-                        <td class="cell-third" colspan="2">Level: <span class="print-level"></span></td>
-                        <td class="cell-twothird" colspan="4">Item: <span class="print-item"></span></td>
+                        <td class="cell-third left" colspan="2">Level: <span class="print-level"></span></td>
+                        <td class="cell-twothird left" colspan="4">Item: <span class="print-item"></span></td>
                     </tr>
                     <tr>
-                        <td class="cell-third" colspan="2">Nature: <span class="print-nature"></span></td>
-                        <td class="cell-twothird" colspan="4">Ability: <span class="print-ability"></span></td>
+                        <td class="cell-third left" colspan="2">Nature: <span class="print-nature"></span></td>
+                        <td class="cell-twothird left" colspan="4">Ability: <span class="print-ability"></span></td>
                     </tr>
                     <tr>
                         <td class="cell-sixth strong center half-bottom">HP</td>
@@ -185,23 +208,23 @@ require "data.php";
                         <td class="cell-sixth strong center half-bottom">Spe</td>
                     </tr>
                     <tr>
-                        <td class="print-hp half-top">&nbsp;</td>
-                        <td class="print-atk half-top">&nbsp;</td>
-                        <td class="print-def half-top">&nbsp;</td>
-                        <td class="print-spa half-top">&nbsp;</td>
-                        <td class="print-spd half-top">&nbsp;</td>
-                        <td class="print-spe half-top">&nbsp;</td>
+                        <td class="print-hp center half-top">&nbsp;</td>
+                        <td class="print-atk center half-top">&nbsp;</td>
+                        <td class="print-def center half-top">&nbsp;</td>
+                        <td class="print-spa center half-top">&nbsp;</td>
+                        <td class="print-spd center half-top">&nbsp;</td>
+                        <td class="print-spe center half-top">&nbsp;</td>
                     </tr>
                     <tr>
                         <td class="cell-whole strong center half-bottom" colspan="6">Moves</td>
                     </tr>
                     <tr>
-                        <td class="cell-half half-top half-bottom half-right" colspan="3"><span class="print-move1"></span></td>
-                        <td class="cell-half half-top half-bottom half-left" colspan="3"><span class="print-move2"></span></td>
+                        <td class="cell-half center half-top half-bottom half-right" colspan="3"><span class="print-move1"></span></td>
+                        <td class="cell-half center half-top half-bottom half-left" colspan="3"><span class="print-move2"></span></td>
                     </tr>
                     <tr>
-                        <td class="cell-half half-top half-right" colspan="3"><span class="print-move3"></span></td>
-                        <td class="cell-half half-top half-left" colspan="3"><span class="print-move4"></span></td>
+                        <td class="cell-half center half-top half-right" colspan="3"><span class="print-move3"></span></td>
+                        <td class="cell-half center half-top half-left" colspan="3"><span class="print-move4"></span></td>
                     </tr>
                 </table>
             </div>

@@ -1,13 +1,13 @@
 (function($) {
     
     function show_forme() {
-        $("#editcell-species").attr("colspan", 6)
-        $("#editcell-forme").removeClass("hide")
+        $("#editcell-species").attr("colspan", 3)
+        $("#editcell-forme, #editcell-forme-label").removeClass("hide")
     }
     
     function hide_forme() {
-        $("#editcell-species").attr("colspan", 12)
-        $("#editcell-forme").addClass("hide")
+        $("#editcell-species").attr("colspan", 9)
+        $("#editcell-forme, #editcell-forme-label").addClass("hide")
         $("#edit-forme").val("regular")
         $("#edit-forme option").not(":selected").remove()
     }
@@ -105,9 +105,13 @@
     function update_click(e) {
         // Get data from the edit table
         var species = $("#edit-species :selected").text()
+        if (species == "") {
+            $("#edit-details").addClass("hide")
+            return
+        }
         var number = $("#edit-species").val()
         var forme = $("#edit-forme").val()
-        if (forme == "regular") { forme = "" }
+        if (forme == "regular" || forme == "" || forme == null) { forme = "" }
         var ability = $("#edit-ability").val()
         var nickname = $("#edit-nickname").val()
         var level = $("#edit-level").val()

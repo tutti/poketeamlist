@@ -1,4 +1,8 @@
 @media screen {
+    * {
+        font-family: sans-serif;
+    }
+    
     .hide {
         display: none;
     }
@@ -11,6 +15,10 @@
         display: block;
     }
     
+    .editlist-forme {
+        font-size: 0.7em;
+    }
+    
     #edit-teamlist table {
         border-collapse: collapse;
     }
@@ -18,13 +26,16 @@
             border: 1px solid black;
         }
             #edit-teamlist table td.editlist-number {
-                width: 50px;
+                padding-left: 5px;
+                width: 33px;
             }
             #edit-teamlist table td.editlist-nameforme {
-                width: 300px;
+                padding-left: 5px;
+                width: 198px;
             }
             #edit-teamlist table td.editlist-ability {
-                width: 100px;
+                padding-left: 5px;
+                width: 135px;
             }
     
     #edit-details table {
@@ -34,17 +45,49 @@
             border: 1px solid black;
             min-width: 50px;
         }
+            #edit-details table td.head-cell {
+                padding-left: 5px;
+            }
+            #edit-species {
+                width: 101px;
+                margin-left: 2px;
+            }
+            #edit-forme {
+                width: 137px;
+                margin-left: 2px;
+            }
             #edit-nickname {
-                width: 100px;
+                width: 313px;
+                margin-left: 2px;
+            }
+            #edit-level, #edit-item {
+                width: 133px;
+                margin-left: 2px;
+            }
+            #edit-nature, #edit-ability {
+                width: 137px;
+                margin-left: 2px;
             }
             #edit-details table td.stat-col {
                 width: 69px;
             }
+                #edit-details table td.stat-head {
+                    text-align: center;
+                }
                 #edit-details table td.stat-col input {
-                    width: 64px;
+                    width: 61px;
+                    margin-left: 2px;
                 }
             
+            #edit-details .moves-head {
+                text-align: center;
+            }
             #edit-details .edit-move {
-                width: 100px;
+                width: 97px;
+                margin-left: 2px;
+            }
+            #edit-submit {
+                width: 425px;
+                margin-left: 2px;
             }
 }

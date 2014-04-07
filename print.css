@@ -1,4 +1,8 @@
 @media print {
+    * {
+        font-family: sans-serif;
+    }
+    
     .strong {
         font-weight: bold;
     }
@@ -7,23 +11,34 @@
         text-align: center;
     }
     
+    .left {
+        padding-left: 5px;
+    }
+    
+    .clearfloat {
+        clear: both;
+    }
+    
     #print {
         display: block;
         width: 670px;
-        
-        font-size: 0.8em;
+        font-size: 10px;
     }
     
     #print .print-player-info {
         border-collapse: collapse;
-        width: 666px;
+        float: left;
+        width: 300px;
     }
         #print .print-player-info td {
             border: 2px solid black;
         }
-            #print .print-player-info td.left {
+            #print .print-player-info td.head {
                 width: 75px;
             }
+    #logo {
+        float: right;
+    }
     
     #print .table-container {
         width: 304px;
@@ -73,4 +88,8 @@
             #print table.print-table .half-right {
                 border-right: 1px solid black !important;
             }
+    
+    .print-forme {
+        font-size: 0.7em;
+    }
 }
