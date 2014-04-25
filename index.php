@@ -16,6 +16,7 @@ require "data.php";
         <link rel="stylesheet" href="print.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="pokemon.js"></script>
+        <script src="formats.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
@@ -47,6 +48,8 @@ require "data.php";
             </div>
             <div id="edit-teamlist">
                 <h2>Your team list</h2>
+                <label for="format">Format:</label>
+                <select id="format" name="format"></select>
                 <table>
                     <tr>
                         <th>#</th>
@@ -192,7 +195,7 @@ require "data.php";
             <img id="logo" src="logo.jpg" />
             <div class="clearfloat"></div>
             <?php for ($i=1; $i<=6; ++$i) { ?>
-            <div class="table-container <?php if ($i%2 == 0) { ?>even<?php } else {?>odd<?php } ?>">
+            <div class="table-container <?php if ($i%2 == 0) { ?>even<?php } else {?>odd<?php } ?>"data-index="<?= $i ?>">
                 <table class="print-table" data-index="<?= $i ?>">
                     <tr>
                         <td class="cell-whole left" colspan="6">Pokémon: <span class="print-species"></span> <span class="print-forme"></span></td>
@@ -236,6 +239,7 @@ require "data.php";
                         <td class="cell-half center half-top half-left" colspan="3"><span class="print-move4"></span></td>
                     </tr>
                 </table>
+                <span class="print-validate"></span>
             </div>
             <?php } ?>
         </div>

@@ -43,6 +43,7 @@
     #print .table-container {
         width: 304px;
         margin-top: 30px;
+        text-align: right;
     }
         #print .table-container.odd {
             float: left;
@@ -54,6 +55,7 @@
         #print table.print-table {
             border-collapse: collapse;
             width: 300px;
+            text-align: left;
         }
             #print table.print-table td {
                 border: 2px solid black;
@@ -88,6 +90,12 @@
             #print table.print-table .half-right {
                 border-right: 1px solid black !important;
             }
+    
+    #print .print-validate {
+        font-style: italic;
+        text-align: right;
+        margin-right: 5px;
+    }
     
     .print-forme {
         font-size: 0.7em;

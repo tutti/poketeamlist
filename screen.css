@@ -19,6 +19,14 @@
         font-size: 0.7em;
     }
     
+    .invalid {
+        background: #FFD6D6;
+    }
+    
+    #format {
+        width: 376px;
+    }
+    
     #edit-teamlist table {
         border-collapse: collapse;
     }

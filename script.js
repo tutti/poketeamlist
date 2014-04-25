@@ -16,7 +16,6 @@
         var number = Number($("#edit-species").val())
         var forme = $("#edit-forme").val()
         if (forme == "" || !forme) { forme = "regular" }
-        console.log(forme)
         var abilities = Pokemon[number].formes[forme]
         
         var current = $("#edit-ability").val()
@@ -50,6 +49,31 @@
         } else {
             hide_forme()
             $('#edit-forme :nth-child(1)').attr("selected", "selected")
+        }
+    }
+    
+    function validate_team() {
+        // Note that this doesn't validate the entire team as a team, but rather
+        // validates each pokémon on the team individually.
+        var format = Formats[$("#format").val()]
+        for (i = 1; i <= 6; ++i) {
+            var table = $(".print-table[data-index='" + i + "']")
+            var editrow = $("tr[data-index='" + i + "']")
+            var number = Number(editrow.find(".editlist-number").text())
+            var item = table.find(".print-item").text()
+            var forme = table.find(".print-forme").text()
+            
+            var result = format.validate(number, item, forme)
+            var str = $(".table-container[data-index='" + i + "'] span.print-validate")
+            if (result) {
+                //table.removeClass("invalid")
+                editrow.removeClass("invalid")
+                if (result === true) { str.text("") } else { str.text(result) }
+            } else {
+                //table.addClass("invalid")
+                editrow.addClass("invalid")
+                str.text("This Pokémon is not allowed in this format.")
+            }
         }
     }
     
@@ -264,6 +288,9 @@
         
         // Hide the edit window
         $("#edit-details").addClass("hide")
+        
+        // Validate the team
+        validate_team()
     }
     
     function species_change() {
@@ -326,6 +353,10 @@
         $("#print-player-division").text(division)
     }
     
+    function format_change() {
+        validate_team()
+    }
+    
     function save_click() {
         var text = to_text()
         $("#textloader-container").removeClass("hide")
@@ -347,6 +378,7 @@
         var text = $("#textloader").val()
         from_text(text)
         $("#textloader-container").addClass("hide")
+        validate_team()
     }
     
     $(document).ready(function() {
@@ -361,5 +393,11 @@
         $("#fromtext-open").click(load_open_click)
         $("#text-close").click(hide_click)
         $("#fromtext").click(load_click)
+        $("#format").change(format_change)
+        
+        // Load the format list
+        for (formatkey in Formats) {
+            $("#format").append($('<option value="'+formatkey+'">'+Formats[formatkey].name+'</option>'))
+        }
     })
 })(jQuery)
