@@ -60,6 +60,7 @@
             var table = $(".print-table[data-index='" + i + "']")
             var editrow = $("tr[data-index='" + i + "']")
             var number = Number(editrow.find(".editlist-number").text())
+            if (number == 0) continue;
             var item = table.find(".print-item").text()
             var forme = table.find(".print-forme").text()
             

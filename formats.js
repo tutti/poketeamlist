@@ -274,9 +274,9 @@ Formats = {
         exclude: [150, 716, 717, 718],
         validate: function(dexnum, itemname, forme) {
             if (this.exclude.indexOf(dexnum) != -1) return false
-            if (pokedex.kalos_central.indexOf(dexnum) != -1) return "Central Kalos #"+dexnum
-            if (pokedex.kalos_coastal.indexOf(dexnum) != -1) return "Coastal Kalos #"+dexnum
-            if (pokedex.kalos_mountain.indexOf(dexnum) != -1) return "Mountain Kalos #"+dexnum
+            if (pokedex.kalos_central.indexOf(dexnum) != -1) return "Central Kalos #"+pokedex.kalos_central.indexOf(dexnum)
+            if (pokedex.kalos_coastal.indexOf(dexnum) != -1) return "Coastal Kalos #"+pokedex.kalos_coastal.indexOf(dexnum)
+            if (pokedex.kalos_mountain.indexOf(dexnum) != -1) return "Mountain Kalos #"+pokedex.kalos_mountain.indexOf(dexnum)
             return false
         }
     },
