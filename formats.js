@@ -478,8 +478,9 @@ Formats = {
         name: "Hoenn pokédex only",
         exclude: [382, 383, 384, 385, 386],
         validate: function(dexnum, itemname, forme) {
-            if (pokedex.hoenn.indexOf(dexnum) == -1) { return false; }
-            return true;
+            if (this.exclude.indexOf(dexnum) != -1) return false
+            if (pokedex.hoenn.indexOf(dexnum) != -1) return "Hoenn Pokédex #"+pokedex.hoenn.indexOf(dexnum)
+            return false;
         }
     },
     standard2014: {
